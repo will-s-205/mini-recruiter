@@ -1,5 +1,4 @@
 import './App.scss';
-import React, { useState } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
 import movieboss from './assets/images/movieboss.png'
 import loading from './assets/images/loading.svg'
@@ -7,7 +6,6 @@ import logoMovie from './assets/images/logo-movie.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
-  const [showButton, setShowButton] = useState(true)
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -45,24 +43,6 @@ function App() {
   // }
   // fetchBotReply()
   ///////////////////////////////////////////////////////////////////////
-
-  // const setupTextarea = document.getElementById('setup-textarea')
-  // const setupInputContainer = document.getElementById('setup-input-container')
-  // const movieBossText = document.getElementById('movie-boss-text')
-
-  // document.getElementById("send-btn").addEventListener("click", () => {
-  //   if (setupTextarea.value) {
-  //     setupInputContainer.innerHTML = `<img src="images/loading.svg" className="loading" id="loading">`
-  //     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
-  //   }
-  //   console.log("clicked")
-  // })
-
-  const handleClick = () => {
-    // console.log('Button was clicked!')
-    // fetchBotReply()
-    return `<img src="images/loading.svg" className="loading" id="loading">`
-  }
 
   function handleSubmit(e) {
     document.getElementById('movie-boss-text').innerText = `Ok, just wait a second while my digital brain digests that...`
