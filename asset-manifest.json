@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/gpt-bot/static/css/main.a132cdac.css",
-    "main.js": "/gpt-bot/static/js/main.13cb8dd1.js",
-    "static/media/logo.svg": "/gpt-bot/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/gpt-bot/static/css/main.c1bc3a27.css",
+    "main.js": "/gpt-bot/static/js/main.d3d1c623.js",
+    "static/media/moviepitchbg-dark.jpg": "/gpt-bot/static/media/moviepitchbg-dark.3412eafd095385d4a8f0.jpg",
+    "static/media/movieboss.png": "/gpt-bot/static/media/movieboss.6f8eef00b7497ac19a48.png",
+    "static/media/loading.svg": "/gpt-bot/static/media/loading.7267728c7cb6dbf3858b5a70f608f26b.svg",
     "index.html": "/gpt-bot/index.html",
-    "main.a132cdac.css.map": "/gpt-bot/static/css/main.a132cdac.css.map",
-    "main.13cb8dd1.js.map": "/gpt-bot/static/js/main.13cb8dd1.js.map"
+    "main.c1bc3a27.css.map": "/gpt-bot/static/css/main.c1bc3a27.css.map",
+    "main.d3d1c623.js.map": "/gpt-bot/static/js/main.d3d1c623.js.map"
   },
   "entrypoints": [
-    "static/css/main.a132cdac.css",
-    "static/js/main.13cb8dd1.js"
+    "static/css/main.c1bc3a27.css",
+    "static/js/main.d3d1c623.js"
   ]
 }
