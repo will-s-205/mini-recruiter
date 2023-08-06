@@ -1,9 +1,9 @@
 import './App.scss'
 import { useState } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
-import recruiterImg from './assets/images/movieboss.png'
+import recruiterImg from './assets/images/boss.png'
 import loading from './assets/images/loading.svg'
-import logoMovie from './assets/images/logo-movie.png'
+import dollar from './assets/images/dollar.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
       'model': 'text-davinci-003',
       'prompt': 'Sound enthusiastic in five words or less.',
     })
-    setSpeachBubble(response.data.choices[0].text)
+    setSpeachBubble(response.data.choices[0].text.trim())
   }
 
   function handleLoading() {
@@ -41,7 +41,7 @@ function App() {
 
       {/* HEADER */}
       <header>
-        <img src={logoMovie} alt="MoviePitch"></img>
+        <img src={dollar} alt="MoviePitch"></img>
         <a href="/"><span>Mini Recruiter</span></a>
       </header>
       <main>
@@ -49,10 +49,10 @@ function App() {
         {/* SPEECH BUBBLE */}
         <section id="setup-container">
           <div className="setup-inner">
-            <img src={recruiterImg} alt="recruiter"></img>
             <div className="speech-bubble-ai" id="speech-bubble-ai">
               <p id="recruiter-text">{speachBubble}</p>
             </div>
+            <img src={recruiterImg} alt="recruiter"></img>
           </div>
 
           {/* INPUT AND LOADING */}
@@ -62,11 +62,11 @@ function App() {
             </div>
           ) : (
             <div className="setup-inner setup-input-container" id="setup-input-container">
-              <textarea id="setup-textarea"
-                placeholder="An evil genius wants to take over the world using AI."></textarea>
               <button onClick={handleSubmit} className="send-btn" id="send-btn" aria-label="send">
                 <img src={sendBtn} alt="send"></img>
               </button>
+              <textarea className="setup-textarea"
+                placeholder="An evil genius wants to take over the world using AI."></textarea>
             </div>
           )}
         </section>
