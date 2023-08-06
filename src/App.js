@@ -8,29 +8,52 @@ function App() {
   const setupInputContainer = document.getElementById('setup-input-container')
   const movieBossText = document.getElementById('movie-boss-text')
 
+
   const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY
   })
+
+  delete configuration.baseOptions.headers['User-Agent'];
 
   const openai = new OpenAIApi(configuration)
 
-  document.getElementById("send-btn").addEventListener("click", () => {
-    if (setupTextarea.value) {
-      setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
-      movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
-    }
-    console.log("clicked")
-  })
-  
+  // document.getElementById("send-btn").addEventListener("click", () => {
+  //   if (setupTextarea.value) {
+  //     setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
+  //     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
+  //   }
+  //   console.log("clicked")
+  // })
+
   async function fetchBotReply() {
     const response = await openai.createCompletion({
       'model': 'text-davinci-003',
-      'prompt': 'Sound enthusiastic in five words or less.'
+      'prompt': 'Sound enthusiastic in five words or less.',
     })
-    console.log(response)
+    console.log(response.data.choices[0].text)
   }
   fetchBotReply()
-  
+
+  ///////////////////////////////////////////////////////////////////////
+  // const url = 'https://api.openai.com/v1/completions'
+  // function fetchBotReply(){
+  //   fetch(url,{
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+  //     },
+  //     body: JSON.stringify({
+  //       'model': 'text-davinci-003',
+  //       'prompt': 'Sound enthusiastic in five words or less.'
+  //     })
+  //   }).then(response => response.json()).then(data => 
+  //     console.log(data.choices[0].text)
+  //   )
+  // }
+  // fetchBotReply()
+  ///////////////////////////////////////////////////////////////////////
+
   return (
     <div className="App">
       <header className="App-header">
