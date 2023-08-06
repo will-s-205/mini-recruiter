@@ -1,17 +1,21 @@
-import './App.scss';
+import './App.scss'
+import { useState } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
-import movieboss from './assets/images/movieboss.png'
+import recruiterImg from './assets/images/movieboss.png'
 import loading from './assets/images/loading.svg'
 import logoMovie from './assets/images/logo-movie.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
+  const speachBubbleText = 'Give me a one-sentence concept and I\'ll give you an eye-catching title, a synopsis the studios will love, a movie poster... AND choose the cast!'
+  const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
+  const [isLoading, setIsLoading] = useState(false);
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
   })
 
-  delete configuration.baseOptions.headers['User-Agent'];
+  delete configuration.baseOptions.headers['User-Agent']
 
   const openai = new OpenAIApi(configuration)
 
@@ -20,75 +24,54 @@ function App() {
       'model': 'text-davinci-003',
       'prompt': 'Sound enthusiastic in five words or less.',
     })
-    console.log(response.data.choices[0].text)
-  }
-  // fetchBotReply()
-  // OR
-  ///////////////////////////////////////////////////////////////////////
-  // const url = 'https://api.openai.com/v1/completions'
-  // function fetchBotReply(){
-  //   fetch(url,{
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-  //     },
-  //     body: JSON.stringify({
-  //       'model': 'text-davinci-003',
-  //       'prompt': 'Sound enthusiastic in five words or less.'
-  //     })
-  //   }).then(response => response.json()).then(data => 
-  //     console.log(data.choices[0].text)
-  //   )
-  // }
-  // fetchBotReply()
-  ///////////////////////////////////////////////////////////////////////
-
-  function handleSubmit(e) {
-    document.getElementById('movie-boss-text').innerText = `Ok, just wait a second while my digital brain digests that...`
-    handleLoading()
+    setSpeachBubble(response.data.choices[0].text)
   }
 
   function handleLoading() {
-    const parent = document.getElementById('setup-input-container')
-    const setupTextarea = document.getElementById('setup-textarea')
-    const sendBtn = document.getElementById('send-btn')
+    setIsLoading(true)
+  }
 
-    if (parent) {
-      sendBtn.remove()
-      setupTextarea.remove()
-      parent.innerHTML = `<img src=${loading} className="loading" id="loading">`
-    }
+  function handleSubmit(e) {
+    fetchBotReply()
+    handleLoading()
   }
 
   return (
     <div className="App">
+
+      {/* HEADER */}
       <header>
         <img src={logoMovie} alt="MoviePitch"></img>
         <a href="/"><span>Mini Recruiter</span></a>
       </header>
       <main>
 
+        {/* SPEECH BUBBLE */}
         <section id="setup-container">
           <div className="setup-inner">
-            <img src={movieboss}></img>
+            <img src={recruiterImg} alt="recruiter"></img>
             <div className="speech-bubble-ai" id="speech-bubble-ai">
-              <p id="movie-boss-text">
-                Give me a one-sentence concept and I'll give you an eye-catching title, a synopsis the studios
-                will love, a movie poster...
-                AND choose the cast!
-              </p>
+              <p id="recruiter-text">{speachBubble}</p>
             </div>
           </div>
-          <div className="setup-inner setup-input-container" id="setup-input-container">
-            <textarea id="setup-textarea"
-              placeholder="An evil genius wants to take over the world using AI."></textarea>
-            <button onClick={handleSubmit} className="send-btn" id="send-btn" aria-label="send">
-              <img src={sendBtn} alt="send"></img>
-            </button>
-          </div>
+
+          {/* INPUT AND LOADING */}
+          {isLoading ? (
+            <div className="setup-inner setup-input-container" id="setup-input-container">
+              <img src={loading} className="loading" alt="Loading..."></img>
+            </div>
+          ) : (
+            <div className="setup-inner setup-input-container" id="setup-input-container">
+              <textarea id="setup-textarea"
+                placeholder="An evil genius wants to take over the world using AI."></textarea>
+              <button onClick={handleSubmit} className="send-btn" id="send-btn" aria-label="send">
+                <img src={sendBtn} alt="send"></img>
+              </button>
+            </div>
+          )}
         </section>
 
+        {/*  */}
         <section className="output-container" id="output-container">
           <div id="output-img-container" className="output-img-container"></div>
           <h1 id="output-title"></h1>
@@ -96,6 +79,8 @@ function App() {
           <p id="output-text"></p>
         </section>
       </main>
+
+      {/* FOOTER */}
       <footer>
         &copy; 2023 by William Step ?????????  {/* where is link to github? */}
       </footer>
@@ -103,4 +88,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
