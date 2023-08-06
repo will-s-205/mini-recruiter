@@ -1,4 +1,5 @@
 import './App.scss';
+import React, { useState } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
 import movieboss from './assets/images/movieboss.png'
 import loading from './assets/images/loading.svg'
@@ -6,6 +7,7 @@ import logoMovie from './assets/images/logo-movie.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
+  const [showButton, setShowButton] = useState(true)
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -58,14 +60,32 @@ function App() {
 
   const handleClick = () => {
     // console.log('Button was clicked!')
-    fetchBotReply()
+    // fetchBotReply()
+    return `<img src="images/loading.svg" className="loading" id="loading">`
+  }
+
+  function handleSubmit(e) {
+    document.getElementById('movie-boss-text').innerText = `Ok, just wait a second while my digital brain digests that...`
+    handleLoading()
+  }
+
+  function handleLoading() {
+    const parent = document.getElementById('setup-input-container')
+    const setupTextarea = document.getElementById('setup-textarea')
+    const sendBtn = document.getElementById('send-btn')
+
+    if (parent) {
+      sendBtn.remove()
+      setupTextarea.remove()
+      parent.innerHTML = `<img src=${loading} className="loading" id="loading">`
+    }
   }
 
   return (
     <div className="App">
       <header>
         <img src={logoMovie} alt="MoviePitch"></img>
-        <a href="/"><span>Movie</span>Helper</a>
+        <a href="/"><span>Mini Recruiter</span></a>
       </header>
       <main>
 
@@ -83,7 +103,7 @@ function App() {
           <div className="setup-inner setup-input-container" id="setup-input-container">
             <textarea id="setup-textarea"
               placeholder="An evil genius wants to take over the world using AI."></textarea>
-            <button onClick={handleClick} className="send-btn" id="send-btn" aria-label="send">
+            <button onClick={handleSubmit} className="send-btn" id="send-btn" aria-label="send">
               <img src={sendBtn} alt="send"></img>
             </button>
           </div>
@@ -97,7 +117,7 @@ function App() {
         </section>
       </main>
       <footer>
-        &copy; 2023 MoviePitch All rights reserved
+        &copy; 2023 by William Step ?????????  {/* where is link to github? */}
       </footer>
     </div>
   );
