@@ -1,13 +1,12 @@
 import logo from './logo.svg';
 import './App.scss';
 import { Configuration, OpenAIApi } from 'openai'
+import movieboss from './assets/images/movieboss.png'
+import loading from './assets/images/loading.svg'
+import logoMovie from './assets/images/logo-movie.png'
+import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
-
-  const setupTextarea = document.getElementById('setup-textarea')
-  const setupInputContainer = document.getElementById('setup-input-container')
-  const movieBossText = document.getElementById('movie-boss-text')
-
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -17,14 +16,6 @@ function App() {
 
   const openai = new OpenAIApi(configuration)
 
-  // document.getElementById("send-btn").addEventListener("click", () => {
-  //   if (setupTextarea.value) {
-  //     setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
-  //     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
-  //   }
-  //   console.log("clicked")
-  // })
-
   async function fetchBotReply() {
     const response = await openai.createCompletion({
       'model': 'text-davinci-003',
@@ -32,8 +23,8 @@ function App() {
     })
     console.log(response.data.choices[0].text)
   }
-  fetchBotReply()
-
+  // fetchBotReply()
+  // OR
   ///////////////////////////////////////////////////////////////////////
   // const url = 'https://api.openai.com/v1/completions'
   // function fetchBotReply(){
@@ -54,22 +45,61 @@ function App() {
   // fetchBotReply()
   ///////////////////////////////////////////////////////////////////////
 
+  // const setupTextarea = document.getElementById('setup-textarea')
+  // const setupInputContainer = document.getElementById('setup-input-container')
+  // const movieBossText = document.getElementById('movie-boss-text')
+
+  // document.getElementById("send-btn").addEventListener("click", () => {
+  //   if (setupTextarea.value) {
+  //     setupInputContainer.innerHTML = `<img src="images/loading.svg" className="loading" id="loading">`
+  //     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
+  //   }
+  //   console.log("clicked")
+  // })
+
+  const handleClick = () => {
+    // console.log('Button was clicked!')
+    fetchBotReply()
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <img src={logoMovie} alt="MoviePitch"></img>
+        <a href="/"><span>Movie</span>Helper</a>
       </header>
+      <main>
+
+        <section id="setup-container">
+          <div className="setup-inner">
+            <img src={movieboss}></img>
+            <div className="speech-bubble-ai" id="speech-bubble-ai">
+              <p id="movie-boss-text">
+                Give me a one-sentence concept and I'll give you an eye-catching title, a synopsis the studios
+                will love, a movie poster...
+                AND choose the cast!
+              </p>
+            </div>
+          </div>
+          <div className="setup-inner setup-input-container" id="setup-input-container">
+            <textarea id="setup-textarea"
+              placeholder="An evil genius wants to take over the world using AI."></textarea>
+            <button onClick={handleClick} className="send-btn" id="send-btn" aria-label="send">
+              <img src={sendBtn} alt="send"></img>
+            </button>
+          </div>
+        </section>
+
+        <section className="output-container" id="output-container">
+          <div id="output-img-container" className="output-img-container"></div>
+          <h1 id="output-title"></h1>
+          <h2 id="output-stars"></h2>
+          <p id="output-text"></p>
+        </section>
+      </main>
+      <footer>
+        &copy; 2023 MoviePitch All rights reserved
+      </footer>
     </div>
   );
 }
