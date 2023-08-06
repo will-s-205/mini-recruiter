@@ -10,6 +10,7 @@ function App() {
   const speachBubbleText = 'Give me a one-sentence concept and I\'ll give you an eye-catching title, a synopsis the studios will love, a movie poster... AND choose the cast!'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState('');
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -32,8 +33,10 @@ function App() {
   }
 
   function handleSubmit(e) {
-    fetchBotReply()
-    handleLoading()
+    e.preventDefault()
+    // fetchBotReply()
+    // handleLoading()
+    console.log(text)
   }
 
   return (
@@ -61,13 +64,18 @@ function App() {
               <img src={loading} className="loading" alt="Loading..."></img>
             </div>
           ) : (
-            <div className="setup-inner setup-input-container" id="setup-input-container">
-              <button onClick={handleSubmit} className="send-btn" id="send-btn" aria-label="send">
+            <form onSubmit={handleSubmit} className="setup-inner setup-input-container" id="setup-input-container">
+              <button className="send-btn" id="send-btn" aria-label="send">
                 <img src={sendBtn} alt="send"></img>
               </button>
-              <textarea className="setup-textarea"
-                placeholder="An evil genius wants to take over the world using AI."></textarea>
-            </div>
+              <textarea
+                name="text"
+                value={text.text}
+                onChange={e => setText(e.target.value)}
+                className="setup-textarea"
+                placeholder="An evil genius wants to take over the world using AI.">
+              </textarea>
+            </form>
           )}
         </section>
 
