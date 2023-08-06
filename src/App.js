@@ -8,10 +8,14 @@ import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
   const speachBubbleText = 'Give me a one-sentence concept and I\'ll give you an eye-catching title, a synopsis the studios will love, a movie poster... AND choose the cast!'
+  const speachBubbleTextWait = 'Ok, just wait a second while my digital brain digests that...'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
+  const [synopsis, setSynopsis] = useState('')
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisble] = useState(false);
   const [text, setText] = useState('');
 
+  // API BOT SETUP
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
   })
@@ -20,23 +24,37 @@ function App() {
 
   const openai = new OpenAIApi(configuration)
 
-  async function fetchBotReply() {
+  async function fetchBotReply(outline) {
     const response = await openai.createCompletion({
+      // https://openai.com/pricing#language-models
+      // https://platform.openai.com/account/rate-limits
       'model': 'text-davinci-003',
-      'prompt': 'Sound enthusiastic in five words or less.',
+      // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
+      prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and that you need some minutes to think about it. Mention one aspect of the sentence.`,
+      max_tokens: 60,
     })
     setSpeachBubble(response.data.choices[0].text.trim())
+    setIsLoading(false)
   }
 
-  function handleLoading() {
-    setIsLoading(true)
+  async function fetchSynopsis(outline) {
+    const response = await openai.createCompletion({
+      model: 'text-davinci-003',
+      // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
+      prompt: `Generate an engaging, professional and marketable movie synopsis based on the following idea: ${outline}`,
+      max_tokens: 60
+    })
+    setSynopsis(response.data.choices[0].text.trim())
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    // fetchBotReply()
-    // handleLoading()
-    console.log(text)
+    setSpeachBubble(speachBubbleTextWait)
+    fetchBotReply(text)
+    fetchSynopsis(text)
+    setIsLoading(true)
+    setIsVisble(true)
+    // console.log(text)
   }
 
   return (
@@ -79,13 +97,24 @@ function App() {
           )}
         </section>
 
-        {/*  */}
-        <section className="output-container" id="output-container">
-          <div id="output-img-container" className="output-img-container"></div>
-          <h1 id="output-title"></h1>
-          <h2 id="output-stars"></h2>
-          <p id="output-text"></p>
-        </section>
+        {/* SYNOPSIS OUTPUT */}
+        {isVisible ? (
+          <section className="output-container" id="output-container">
+            <div id="output-img-container" className="output-img-container"></div>
+            <h1 id="output-title"></h1>
+            <h2 id="output-stars"></h2>
+            <p
+              name="synopsis"
+              value={synopsis.text}
+              onChange={e => setSynopsis(e.target.value)}
+              id="output-text"
+            >
+              {synopsis}
+            </p>
+          </section>
+        ) : (
+          <></>
+        )}
       </main>
 
       {/* FOOTER */}

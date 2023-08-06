@@ -173,9 +173,6 @@ textarea::placeholder {
 /* larger mobiles+ */
 
 @media(min-width: 380px) {
-  .setup-input-container {
-    // padding-top: 0;
-  }
 
   .speech-bubble-ai:before {
     top: 92px;
@@ -243,7 +240,7 @@ textarea::placeholder {
    ================= */
 
 .output-container {
-  display: none;
+  // display: none;
   flex-direction: column;
   margin: 1em auto;
   color: var(--dark);
