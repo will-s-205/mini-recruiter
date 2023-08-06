@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.scss';
 import { Configuration, OpenAIApi } from 'openai'
 import movieboss from './assets/images/movieboss.png'
