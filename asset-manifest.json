@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/gpt-bot/static/css/main.8aac1288.css",
-    "main.js": "/gpt-bot/static/js/main.00a85a49.js",
+    "main.js": "/gpt-bot/static/js/main.d23b7559.js",
     "static/media/maang.jpg": "/gpt-bot/static/media/maang.af8d00d719254b7037a2.jpg",
     "static/media/boss.png": "/gpt-bot/static/media/boss.6f8eef00b7497ac19a48.png",
     "static/media/dollar.png": "/gpt-bot/static/media/dollar.a9564949953cb5b06101.png",
     "static/media/loading.svg": "/gpt-bot/static/media/loading.7267728c7cb6dbf3858b5a70f608f26b.svg",
     "index.html": "/gpt-bot/index.html",
     "main.8aac1288.css.map": "/gpt-bot/static/css/main.8aac1288.css.map",
-    "main.00a85a49.js.map": "/gpt-bot/static/js/main.00a85a49.js.map"
+    "main.d23b7559.js.map": "/gpt-bot/static/js/main.d23b7559.js.map"
   },
   "entrypoints": [
     "static/css/main.8aac1288.css",
-    "static/js/main.00a85a49.js"
+    "static/js/main.d23b7559.js"
   ]
 }
