@@ -106,7 +106,7 @@ function App() {
                 onChange={e => setText(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="setup-textarea"
-                placeholder="Press SHIFT+ENTER to submit"
+                placeholder="Press SHIFT+ENTER"
               >
               </textarea>
             </form>
@@ -118,7 +118,6 @@ function App() {
 
         {/* ADVICE OUTPUT */}
         {!isLoading ? (
-
           <section className="output-container" id="output-container">
             <div id="output-img-container" className="output-img-container"></div>
             <h1 id="output-title">Piece of advice</h1>
@@ -141,7 +140,7 @@ function App() {
 
       {/* FOOTER */}
       <footer>
-        &copy; 2023 by William Step ?????????  {/* where is link to github? */}
+        <a href="https://github.com/will-s-205/mini-recruiter" target='_blank'>&copy; 2023 by William Step</a>
       </footer>
     </div>
   );
