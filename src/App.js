@@ -43,7 +43,7 @@ function App() {
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
       prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first technical question`,
       max_tokens: 60,
-    })
+    }).catch(err => console.log(err))
     setSpeachBubble(response.data.choices[0].text.replace(/^[.!]/, ''))
     setIsLoading(false)
   }
@@ -55,17 +55,14 @@ function App() {
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
       prompt: `${modifiedData}`,
       max_tokens: 120,
-    })
+    }).catch(err => console.log(err))
     setAdvice(response.data.choices[0].text.trim())
-    console.log(modifiedData)
   }
 
   function handleSubmit(e) {
-    // e.preventDefault()
     setSpeachBubble(speachBubbleTextWait)
     fetchBotReply(text)
     setIsLoading(true)
-    // console.log(text)
   }
 
   return (
@@ -73,8 +70,8 @@ function App() {
 
       {/* HEADER */}
       <header>
-        <img src={dollar} alt="MoviePitch"></img>
-        <a href="/"><span>Mini Recruiter</span></a>
+        <img src={dollar} alt="dollar"></img>
+        <span>Mini Recruiter</span>
       </header>
       <main>
 
@@ -123,6 +120,7 @@ function App() {
               value={advice.text}
               onChange={e => setAdvice(e.target.value)}
               id="output-text"
+              area-lebel="advice-text"
             >
               {advice}
             </p>
