@@ -42,8 +42,7 @@ function App() {
       // https://platform.openai.com/account/rate-limits
       'model': 'text-davinci-003',
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
-      // prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and that you need some minutes to think about it. Mention one aspect of the sentence.`,
-      prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first question`,
+      prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first technical question`,
       max_tokens: 60,
     })
     setSpeachBubble(response.data.choices[0].text.replace(/^[.!]/, ''))
