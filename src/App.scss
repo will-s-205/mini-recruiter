@@ -192,6 +192,12 @@ textarea::placeholder {
   }
 }
 
+@media(max-height: 1000px) {
+  body {
+    height: auto;
+  }
+}
+
 /* =================
     Buttons & SVG 
    ================= */
@@ -281,7 +287,7 @@ footer {
   text-shadow: 0 0 15px var(--dark);
 }
 
-footer > a {
+footer>a {
   text-decoration: none;
   color: var(--light);
 }

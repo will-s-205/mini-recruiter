@@ -12,7 +12,6 @@ function App() {
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [advice, setAdvice] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isVisible, setIsVisble] = useState(true)
   const [text, setText] = useState('')
 
   // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
@@ -65,9 +64,7 @@ function App() {
     // e.preventDefault()
     setSpeachBubble(speachBubbleTextWait)
     fetchBotReply(text)
-
     setIsLoading(true)
-    setIsVisble(true)
     // console.log(text)
   }
 
@@ -121,7 +118,6 @@ function App() {
           <section className="output-container" id="output-container">
             <div id="output-img-container" className="output-img-container"></div>
             <h1 id="output-title">Piece of advice</h1>
-            <h2 id="output-stars"></h2>
             <p
               name="synopsis"
               value={advice.text}
@@ -140,7 +136,7 @@ function App() {
 
       {/* FOOTER */}
       <footer>
-        <a href="https://github.com/will-s-205/mini-recruiter" target='_blank'>&copy; 2023 by William Step</a>
+        <a href="https://github.com/will-s-205/mini-recruiter" target="_blank" rel="noreferrer">&copy; 2023 by William Step</a>
       </footer>
     </div>
   );
