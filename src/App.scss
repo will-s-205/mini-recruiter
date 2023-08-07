@@ -204,7 +204,7 @@ textarea::placeholder {
   border-bottom-left-radius: var(--border-rad-lg);
   min-width: 50px;
   cursor: pointer;
-  
+
   &:hover {
     background: linear-gradient(90deg, #FFD500 0%, #F7A100 100%);
     transform: scale(0.95);
@@ -235,6 +235,12 @@ textarea::placeholder {
   filter: none;
 }
 
+.loading2 {
+  display: block;
+  max-width: 40px;
+  margin: 30% auto;
+}
+
 /* =================
     Output 
    ================= */
@@ -242,7 +248,7 @@ textarea::placeholder {
 .output-container {
   // display: none;
   flex-direction: column;
-  margin: 1em auto;
+  margin: 0 auto;
   color: var(--dark);
   padding: 1em;
 }
@@ -251,6 +257,15 @@ textarea::placeholder {
   max-width: 100%;
   border-radius: var(--border-rad-lg);
   box-shadow: 1px 1px 5px 1px var(--dark);
+}
+
+.middleBar {
+  background-color: #808080dd;
+  color: var(--light);
+  padding: 1.5em;
+  font-size: .7em;
+  text-align: center;
+  text-shadow: 0 0 15px var(--dark);
 }
 
 /* =================

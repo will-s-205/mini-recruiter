@@ -1,5 +1,5 @@
 import './App.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
 import recruiterImg from './assets/images/boss.png'
 import loading from './assets/images/loading.svg'
@@ -7,13 +7,25 @@ import dollar from './assets/images/dollar.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
-  const speachBubbleText = 'Give me a one-sentence concept and I\'ll give you an eye-catching title, a synopsis the studios will love, a movie poster... AND choose the cast!'
+  const speachBubbleText = 'Hi there, I am your new recruiter. I am here to help you find a job. I will ask some questions. Consider it as a phone screen call. What kind of role do you think fits you well? Say JavaScript Engineer, or Python Backend Developer, or something else?'
   const speachBubbleTextWait = 'Ok, just wait a second while my digital brain digests that...'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
-  const [synopsis, setSynopsis] = useState('')
-  const [isLoading, setIsLoading] = useState(false);
-  const [isVisible, setIsVisble] = useState(false);
-  const [text, setText] = useState('');
+  const [advice, setAdvice] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isVisible, setIsVisble] = useState(true)
+  const [text, setText] = useState('')
+
+  // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
+  const handleKeyDown = (event) => {
+    if (event.shiftKey && event.keyCode === 13) { // Check for SHIFT + ENTER combination
+      handleSubmit();
+    }
+  }
+
+  // // TRIGGERING ADVICES ONCE SPEACH BUBBLE IS FILLED 
+  useEffect(() => {
+    fetchAdvice(speachBubble)
+  }, [speachBubble])
 
   // API BOT SETUP
   const configuration = new Configuration({
@@ -30,28 +42,31 @@ function App() {
       // https://platform.openai.com/account/rate-limits
       'model': 'text-davinci-003',
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
-      prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and that you need some minutes to think about it. Mention one aspect of the sentence.`,
+      // prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and that you need some minutes to think about it. Mention one aspect of the sentence.`,
+      prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first question`,
       max_tokens: 60,
     })
-    setSpeachBubble(response.data.choices[0].text.trim())
+    setSpeachBubble(response.data.choices[0].text)
     setIsLoading(false)
   }
 
-  async function fetchSynopsis(outline) {
+  async function fetchAdvice(outline) {
+    const modifiedData = outline.replace(/you.{1,2}?/gi, 'I')
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
-      prompt: `Generate an engaging, professional and marketable movie synopsis based on the following idea: ${outline}`,
-      max_tokens: 60
+      prompt: `${modifiedData}`,
+      max_tokens: 120,
     })
-    setSynopsis(response.data.choices[0].text.trim())
+    setAdvice(response.data.choices[0].text.trim())
+    console.log(modifiedData)
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
+    // e.preventDefault()
     setSpeachBubble(speachBubbleTextWait)
     fetchBotReply(text)
-    fetchSynopsis(text)
+
     setIsLoading(true)
     setIsVisble(true)
     // console.log(text)
@@ -90,30 +105,38 @@ function App() {
                 name="text"
                 value={text.text}
                 onChange={e => setText(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="setup-textarea"
-                placeholder="An evil genius wants to take over the world using AI.">
+                placeholder="Press SHIFT+ENTER to submit"
+              >
               </textarea>
             </form>
           )}
         </section>
 
-        {/* SYNOPSIS OUTPUT */}
-        {isVisible ? (
+        {/* MIDDLE BAR */}
+        <div className='middleBar'></div>
+
+        {/* ADVICE OUTPUT */}
+        {!isLoading ? (
+
           <section className="output-container" id="output-container">
             <div id="output-img-container" className="output-img-container"></div>
-            <h1 id="output-title"></h1>
+            <h1 id="output-title">Piece of advice</h1>
             <h2 id="output-stars"></h2>
             <p
               name="synopsis"
-              value={synopsis.text}
-              onChange={e => setSynopsis(e.target.value)}
+              value={advice.text}
+              onChange={e => setAdvice(e.target.value)}
               id="output-text"
             >
-              {synopsis}
+              {advice}
             </p>
           </section>
         ) : (
-          <></>
+          <section className="output-container" id="output-container">
+            <img src={loading} className="loading2" alt="Loading..."></img>
+          </section>
         )}
       </main>
 
