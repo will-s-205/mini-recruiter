@@ -46,7 +46,7 @@ function App() {
       prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first question`,
       max_tokens: 60,
     })
-    setSpeachBubble(response.data.choices[0].text)
+    setSpeachBubble(response.data.choices[0].text.replace(/^[.!]/, ''))
     setIsLoading(false)
   }
 
