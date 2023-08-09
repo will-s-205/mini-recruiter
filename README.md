@@ -1,4 +1,5 @@
 # Mini Recruiter
+WARNING! Server takes (30-60sec) to start web application
 ### Click project live below:
 [![Mini Recruiter cover](https://raw.githubusercontent.com/will-s-205/will-s-205.github.io/main/fcc-portfolio/img/2023-08-06%20Mini%20Recruiter.png)](https://mini-recruiter.rigo205.repl.co/)
 Based on openai chat bot asks questions and gives recommended answers along the way
