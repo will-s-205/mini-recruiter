@@ -1,9 +1,9 @@
 import './App.scss'
 import { useState, useEffect } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
-import recruiterImg from './assets/images/boss.png'
+import ai from './assets/images/ai.png'
 import loading from './assets/images/loading.svg'
-import dollar from './assets/images/dollar.png'
+import aiSmall from './assets/images/ai-small.png'
 import sendBtn from './assets/images/send-btn-icon.png'
 import toast, { Toaster } from 'react-hot-toast'
 import * as pdfjs from 'pdfjs-dist'
@@ -11,7 +11,7 @@ import * as pdfjs from 'pdfjs-dist'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`
 
 function App() {
-  const speachBubbleText = 'Hi, I am your new assistant. I will help you to understand what is in the document. Please ask your questions'
+  const speachBubbleText = 'Hi, I am your new assistant. I will help you to understand what is in the document. Please upload your PDF document and ask your questions'
   const speachBubbleTextWait = 'Ok, just wait a second while my digital brain digests that...'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [isLoading, setIsLoading] = useState(false)
@@ -20,18 +20,12 @@ function App() {
 
   // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
   const handleKeyDown = (event) => {
-    if (event.shiftKey && event.keyCode === 13) { // Check for SHIFT + ENTER combination
-      handleSubmit();
+    if (event.keyCode === 13) { // Press ENTER
+      handleSubmit()
     }
   }
 
   useEffect(() => {
-    if (pdfText) {
-      // setSpeachBubble(speachBubbleTextWait)
-      // fetchBotReply(pdfText)
-      // setIsLoading(true)
-      console.log('pdfText', pdfText)
-    }
   }, [pdfText])
 
   // API BOT SETUP
@@ -102,8 +96,8 @@ function App() {
 
       {/* HEADER */}
       <header>
-        <img src={dollar} alt="dollar"></img>
-        <span>Mini Recruiter</span>
+        <img src={aiSmall} alt="dollar"></img>
+        <span>Document Assistant</span>
       </header>
       <main>
 
@@ -113,15 +107,12 @@ function App() {
             <div className="speech-bubble-ai" id="speech-bubble-ai">
               <p id="recruiter-text">{speachBubble}</p>
             </div>
-            <img src={recruiterImg} alt="recruiter"></img>
+            <img src={ai} alt="recruiter"></img>
           </div>
 
+          {/* FILE INPUT */}
           <div>
-            <input type="file" accept=".pdf" onChange={onFileChange} />
-            {/* <div>
-              <strong>Extracted Text:</strong>
-              <p>{text}</p>
-            </div> */}
+            <input type="file" accept=".pdf" onChange={onFileChange} className='input-file'/>
           </div>
 
           {/* INPUT AND LOADING */}
@@ -150,7 +141,7 @@ function App() {
 
       {/* FOOTER */}
       <footer>
-        <a href="https://github.com/will-s-205/mini-recruiter" target="_blank" rel="noreferrer">&copy; 2023 by ????????</a>
+        <a href="https://github.com/will-s-205/mini-recruiter/tree/Document-Assistant" target="_blank" rel="noreferrer">&copy; 2023 by William Step</a>
       </footer>
     </div>
   );
