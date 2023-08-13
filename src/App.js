@@ -8,15 +8,20 @@ import sendBtn from './assets/images/send-btn-icon.png'
 
 function App() {
   const speachBubbleText = 'Hi there, I am your new recruiter. I am here to help you find a job. I will ask some questions. Consider it as a phone screen call. What kind of role do you think fits you well? Say JavaScript Engineer, or Python Backend Developer, or something else?'
-  const speachBubbleTextWait = 'Ok, just wait a second while my digital brain digests that...'
+  const speachBubbleTextWait = 'Ok, next question.'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [advice, setAdvice] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
 
+  function readAloud() {
+    let utteranceInit = new SpeechSynthesisUtterance(speachBubble)
+    speechSynthesis.speak(utteranceInit)
+  }
+
   // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
   const handleKeyDown = (event) => {
-    if (event.shiftKey && event.keyCode === 13) { // Check for SHIFT + ENTER combination
+    if (event.shiftKey && event.keyCode === 13) {
       handleSubmit();
     }
   }
@@ -24,6 +29,7 @@ function App() {
   // // TRIGGERING ADVICES ONCE SPEACH BUBBLE IS FILLED 
   useEffect(() => {
     fetchAdvice(speachBubble)
+    readAloud()
   }, [speachBubble])
 
   // API BOT SETUP
