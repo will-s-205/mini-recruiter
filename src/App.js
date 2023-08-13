@@ -16,6 +16,7 @@ function App() {
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
+  const [pdfText, setPdfText] = useState('')
 
   // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
   const handleKeyDown = (event) => {
@@ -23,6 +24,15 @@ function App() {
       handleSubmit();
     }
   }
+
+  useEffect(() => {
+    if (pdfText) {
+      // setSpeachBubble(speachBubbleTextWait)
+      // fetchBotReply(pdfText)
+      // setIsLoading(true)
+      console.log('pdfText', pdfText)
+    }
+  }, [pdfText])
 
   // API BOT SETUP
   const configuration = new Configuration({
@@ -33,16 +43,16 @@ function App() {
 
   const openai = new OpenAIApi(configuration)
 
-  async function fetchBotReply(outline) {
+  async function fetchBotReply(outline, question) {
     const response = await openai.createCompletion({
       // https://openai.com/pricing#language-models
       // https://platform.openai.com/account/rate-limits
       'model': 'text-davinci-003',
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
-      prompt: `From now on, you are my agent that shortly answers my questions based on next information: ${outline}`,
+      prompt: `From now on, you are my agent that shortly answers my ${question} based on next information: ${outline}`,
       max_tokens: 60,
     }).catch(err => console.log(err))
-    setSpeachBubble(response.data.choices[0].text.replace(/^[.!]/, ''))
+    setSpeachBubble(response.data.choices[0].text.trim().replace(/^[.!]/, ''))
     setIsLoading(false)
   }
 
@@ -63,7 +73,7 @@ function App() {
 
       // JOIN ALL PAGES TEXT
       const allText = await Promise.all(pageTextPromises)
-      setText(allText.join(' '))
+      setPdfText(allText.join(' '))
       toast.success("PDF successfully processed")
     } catch (error) {
       console.error("Error processing PDF:", error)
@@ -76,14 +86,13 @@ function App() {
     const selectedFile = event.target.files[0]
     if (selectedFile) {
       convertPdfToText(selectedFile)
-      console.log(selectedFile)
-      fetchBotReply(selectedFile)
+      fetchBotReply(pdfText)
     }
   }
 
   function handleSubmit(e) {
     setSpeachBubble(speachBubbleTextWait)
-    fetchBotReply(text)
+    fetchBotReply(pdfText, text)
     setIsLoading(true)
   }
 
@@ -137,30 +146,6 @@ function App() {
             </form>
           )}
         </section>
-
-        {/* MIDDLE BAR */}
-        <div className='middleBar'></div>
-
-        {/* ADVICE OUTPUT */}
-        {/* {!isLoading ? (
-          <section className="output-container" id="output-container">
-            <div id="output-img-container" className="output-img-container"></div>
-            <h1 id="output-title">Piece of advice</h1>
-            <p
-              name="synopsis"
-              value={advice.text}
-              onChange={e => setAdvice(e.target.value)}
-              id="output-text"
-              area-lebel="advice-text"
-            >
-              {advice}
-            </p>
-          </section>
-        ) : (
-          <section className="output-container" id="output-container">
-            <img src={loading} className="loading2" alt="Loading..."></img>
-          </section>
-        )} */}
       </main>
 
       {/* FOOTER */}
