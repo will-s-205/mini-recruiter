@@ -25,14 +25,14 @@ function App() {
     }
   }
 
-  function readAloud() {
-    let utteranceInit = new SpeechSynthesisUtterance(speachBubble)
+  function readAloud(text) {
+    let utteranceInit = new SpeechSynthesisUtterance(text)
     speechSynthesis.speak(utteranceInit)
   }
 
   // TRIGGERING READ ALOUD FUNCTION
   useEffect(() => {
-    readAloud()
+    readAloud(speachBubble)
   }, [speachBubble])
 
   // TRIGGERS ON PDF UPLOADED
