@@ -16,6 +16,8 @@ function App() {
 
   function readAloud() {
     let utteranceInit = new SpeechSynthesisUtterance(speachBubble)
+    utteranceInit.rate = 0.8
+    utteranceInit.pitch = 0.8
     speechSynthesis.speak(utteranceInit)
   }
 
