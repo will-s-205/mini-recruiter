@@ -97,7 +97,7 @@ function App() {
           )}
         </section>
 
-        {/* SYNOPSIS OUTPUT */}
+        {/* ADVICE OUTPUT */}
         {isVisible ? (
           <section className="output-container" id="output-container">
             <div id="output-img-container" className="output-img-container"></div>
