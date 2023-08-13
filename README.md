@@ -10,3 +10,4 @@ App created as a part of efforts to learn and practice openai, API, chat bot fea
 * Chat bot functionality
 * Using openai
 * Using async/await
+* Using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
