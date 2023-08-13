@@ -12,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/l
 
 function App() {
   const speachBubbleText = 'Hi, I am your new assistant. I will help you to understand what is in the document. Please upload your PDF document and ask your questions'
-  const speachBubbleTextWait = 'Ok, just wait a second while my digital brain digests that...'
+  const speachBubbleTextWait = 'Ok, just wait a second'
   const [speachBubble, setSpeachBubble] = useState(speachBubbleText)
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
@@ -20,11 +20,22 @@ function App() {
 
   // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
   const handleKeyDown = (event) => {
-    if (event.keyCode === 13) { // Press ENTER
+    if (event.shiftKey && event.keyCode === 13) {
       handleSubmit()
     }
   }
 
+  function readAloud() {
+    let utteranceInit = new SpeechSynthesisUtterance(speachBubble)
+    speechSynthesis.speak(utteranceInit)
+  }
+
+  // TRIGGERING READ ALOUD FUNCTION
+  useEffect(() => {
+    readAloud()
+  }, [speachBubble])
+
+  // TRIGGERS ON PDF UPLOADED
   useEffect(() => {
   }, [pdfText])
 
@@ -112,7 +123,7 @@ function App() {
 
           {/* FILE INPUT */}
           <div>
-            <input type="file" accept=".pdf" onChange={onFileChange} className='input-file'/>
+            <input type="file" accept=".pdf" onChange={onFileChange} className='input-file' />
           </div>
 
           {/* INPUT AND LOADING */}
