@@ -142,7 +142,7 @@ function App() {
 
       {/* FOOTER */}
       <footer>
-        <a href="https://github.com/will-s-205/mini-recruiter" target="_blank" rel="noreferrer">&copy; 2023 by William Step</a>
+        <a href="https://github.com/will-s-205/mini-recruiter/tree/Mini-Recruiter" target="_blank" rel="noreferrer">&copy; 2023 by William Step</a>
       </footer>
     </div>
   );
