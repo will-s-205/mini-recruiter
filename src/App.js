@@ -21,9 +21,9 @@ function App() {
     speechSynthesis.speak(utteranceInit)
   }
 
-  // PRESS SHIFT+ENTER TO SUBMIT AN ANSWER
+  // PRESS ENTER
   const handleKeyDown = (event) => {
-    if (event.shiftKey && event.keyCode === 13) {
+    if (event.keyCode === 13) {
       handleSubmit();
     }
   }
@@ -108,7 +108,7 @@ function App() {
                 onChange={e => setText(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="setup-textarea"
-                placeholder="Press SHIFT+ENTER"
+                placeholder="Press ENTER"
               >
               </textarea>
             </form>
