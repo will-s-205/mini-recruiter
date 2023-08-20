@@ -2,7 +2,7 @@
 WARNING! Server takes 30sec to start web application
 ### Click project live below:
 [![Mini Recruiter cover](https://raw.githubusercontent.com/will-s-205/will-s-205.github.io/main/fcc-portfolio/img/2023-08-06%20Mini%20Recruiter.png)](https://mini-recruiter.rigo205.repl.co/)
-Based on OpenAI technologies, the chat bot asks questions and gives recommended answers along the way
+Based on OpenAI technologies chat bot using Web Speech API to ask and answer technical questions
 ## Goal
 App created as a part of efforts to learn and practice openai, API, chat bot features
 ## Learned and practiced
