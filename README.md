@@ -1,8 +1,8 @@
 # Document Assistant
-WARNING! Server takes (30-60sec) to start web application
+WARNING! Server takes 30sec to start web application
 ### Click project live below:
 [![Document Assistant](https://raw.githubusercontent.com/will-s-205/will-s-205.github.io/main/fcc-portfolio/img/2023-08-12%20Document%20Assistant.png)](https://document-assistant.rigo205.repl.co)
-Based on openai chat bot asks to upload PDF and answers questions related to it
+Based on OpenAI technologies, the chat bot asks to upload a PDF and answers questions related to it. Can even translate it for you.
 ## Goal
 App created as a part of efforts to learn and practice openai, API, chat bot features
 ## Learned and practiced
