@@ -13,6 +13,6 @@ App created as a part of efforts to learn and practice openai, API, chat bot fea
 ## Learned and practiced
 * Building apps with React and JS
 * Chat bot functionality
-* Using openai
+* Using OpenAI
 * Using async/await
 * Using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
