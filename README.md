@@ -1,4 +1,4 @@
-# Mini Recruiter
+# Mini Recruiter and Document Assistant
 WARNING! Server takes (30-60sec) to start web application
 * [Document Assistant](https://github.com/will-s-205/mini-recruiter/tree/Document-Assistant)
 * [Mini Recruiter](https://github.com/will-s-205/mini-recruiter/tree/Mini-Recruiter)
