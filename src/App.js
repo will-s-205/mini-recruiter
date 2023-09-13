@@ -47,7 +47,7 @@ function App() {
     const response = await openai.createCompletion({
       // https://openai.com/pricing#language-models
       // https://platform.openai.com/account/rate-limits
-      'model': 'text-davinci-003',
+      'model': 'text-davinci-003', // warning: "This model version is deprecated. Migrate before January 4, 2024 to avoid disruption of service. Learn more https://platform.openai.com/docs/deprecations"
       // 'model': 'text-ada-001', // MORE SIMPLE VERSION AND LESS EXPENSIVE
       prompt: `From now on, you are my interviewer for a ${outline} role. Ask me my first technical question`,
       max_tokens: 60,
