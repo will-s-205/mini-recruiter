@@ -2,7 +2,6 @@
 WARNING! Server takes (30-60sec) to start web application
 * [Document Assistant](https://github.com/will-s-205/mini-recruiter/tree/Document-Assistant)
 * [Mini Recruiter](https://github.com/will-s-205/mini-recruiter/tree/Mini-Recruiter)
-
 ### Demo:
 [![SFnode MeetUp presentation](https://raw.githubusercontent.com/will-s-205/will-s-205.github.io/main/fcc-portfolio/img/2023-10-04%20SFnode%20MeetUp%20my%20presentation%20Mini%20Recruiter%20and%20Document%20Assistant.jpg)](https://www.youtube.com/watch?v=7teOcMMOhIs)
 ### Click project live below:
@@ -16,6 +15,7 @@ App created as a part of efforts to learn and practice openai, API, chat bot fea
 ## Learned and practiced
 * Building apps with React and JS
 * Chat bot functionality
-* Using OpenAI
-* Using async/await
+* Using openai
+* Uploading functionality
+* Converting PDF to text
 * Using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)

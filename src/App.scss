@@ -21,17 +21,12 @@ body {
   font-family: 'Poppins';
   background-size: cover;
   background-repeat: repeat-y;
-  background-image: linear-gradient(260deg, #c0c0c0b6, rgba(136, 136, 206, 0.8)), url('assets/images/maang.jpg');
+  background-image: linear-gradient(260deg, #c0c0c0b6, rgba(151, 151, 197, 0.8)), url('assets/images/pexels-mike-1181772.jpg');
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.App {
-  border: 5px solid lightgray;
-  border-radius: 5px;
 }
 
 /* =================
@@ -56,27 +51,25 @@ p {
    ================= */
 
 header {
-  background-color: #808080dd;
+  background-color: #344fa2dd;
   text-shadow: 0 0 15px var(--dark);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: .3em;
+  border-radius: 25px 25px 0 0;
 }
 
 header>img {
   height: 26px;
 }
 
-header>a {
+header span {
+  font-weight: 700;
   color: var(--light);
   font-size: 1.5em;
   text-decoration: none;
   padding: 1em 0;
-}
-
-header span {
-  font-weight: 700;
 }
 
 section {
@@ -192,21 +185,34 @@ textarea::placeholder {
   }
 }
 
+@media(max-height: 1000px) {
+  body {
+    height: auto;
+  }
+}
+
 /* =================
     Buttons & SVG 
    ================= */
 
+.input-file {
+  display: flex;
+  margin: 0 auto;
+  background-color: var(--white);
+  background: linear-gradient(90deg, #e1e1e16e 0%, #a0a0a087 100%);
+  border-radius: 0 10px 10px 0;
+}
+
 .send-btn {
   border: none;
-  background: linear-gradient(90deg, #6262626e 0%, #616161ac 100%);
-  // background: #F7A100;
+  background: linear-gradient(90deg, #344fa2dd 0%, #203c90 100%);
   border-top-left-radius: var(--border-rad-lg);
   border-bottom-left-radius: var(--border-rad-lg);
   min-width: 50px;
   cursor: pointer;
-  
+
   &:hover {
-    background: linear-gradient(90deg, #FFD500 0%, #F7A100 100%);
+    background: linear-gradient(90deg, #f1a900 0%, #e28800 100%);
     transform: scale(0.95);
     transition: all 0.2s ease-in-out;
   }
@@ -235,6 +241,12 @@ textarea::placeholder {
   filter: none;
 }
 
+.loading2 {
+  display: block;
+  max-width: 40px;
+  margin: 30% auto;
+}
+
 /* =================
     Output 
    ================= */
@@ -242,7 +254,7 @@ textarea::placeholder {
 .output-container {
   // display: none;
   flex-direction: column;
-  margin: 1em auto;
+  margin: 0 auto;
   color: var(--dark);
   padding: 1em;
 }
@@ -258,10 +270,16 @@ textarea::placeholder {
    ================= */
 
 footer {
-  background-color: #808080dd;
+  background-color: #344fa2dd;
   color: var(--light);
   padding: .8em;
   font-size: .7em;
   text-align: center;
   text-shadow: 0 0 15px var(--dark);
+  border-radius: 0 0 25px 25px;
+}
+
+footer>a {
+  text-decoration: none;
+  color: var(--light);
 }
