@@ -1,7 +1,7 @@
 import './App.scss'
 import { useState, useEffect } from 'react'
 import { Configuration, OpenAIApi } from 'openai'
-import recruiterImg from './assets/images/boss.png'
+import recruiterImg from './assets/images/ai.png'
 import loading from './assets/images/loading.svg'
 import dollar from './assets/images/dollar.png'
 import sendBtn from './assets/images/send-btn-icon.png'
@@ -89,7 +89,7 @@ function App() {
             <div className="speech-bubble-ai" id="speech-bubble-ai">
               <p id="recruiter-text">{speachBubble}</p>
             </div>
-            <img src={recruiterImg} alt="recruiter"></img>
+            <img src={recruiterImg} className='ai-recruiter' alt="recruiter"></img>
           </div>
 
           {/* INPUT AND LOADING */}
